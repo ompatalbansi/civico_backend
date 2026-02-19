@@ -1,0 +1,32 @@
+{
+  "name": "civico_backend",
+  "version": "1.0.0",
+  "description": "this is a backend of Civico Complaint System",
+  "keywords": [
+    "backend_Civico"
+  ],
+  "homepage": "https://github.com/ompatalbansi/civico_backend#readme",
+  "bugs": {
+    "url": "https://github.com/ompatalbansi/civico_backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ompatalbansi/civico_backend.git"
+  },
+  "license": "ISC",
+  "author": "Om Patalbansi",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "devDependencies": {
+    "dotenv": "^17.3.1",
+    "nodemon": "^3.1.11"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "express": "^5.2.1",
+    "mongoose": "^9.2.1"
+  }
+}
