@@ -15,18 +15,18 @@
   },
   "license": "ISC",
   "author": "Om Patalbansi",
-  "type": "module",
-  "main": "index.js",
+  "type": "commonjs",
+  "main": "src/server.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon src/server.js"
   },
   "devDependencies": {
-    "dotenv": "^17.3.1",
-    "nodemon": "^3.1.11"
+    "dotenv": "^17.3.1"
   },
   "dependencies": {
     "cookie-parser": "^1.4.7",
     "express": "^5.2.1",
-    "mongoose": "^9.2.1"
+    "mongoose": "^9.2.1",
+    "nodemon": "^3.1.11"
   }
 }
