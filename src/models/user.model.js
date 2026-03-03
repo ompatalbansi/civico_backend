@@ -1,28 +1,34 @@
 import mongoose from "mongoose";
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt";
 
-const userSchema= new mongoose.Schema(
-    userName= {
-        type: String,
-        required: true,
-    },{
-        password: {
+const userSchema = new mongoose.Schema(
+        {
+        userName: {
+            type: String,
+            required: true,
+        },
+        password: {     
             type: String,
             required: true,
         }
     }
-)
-userSchema.pre("save", function async (){
-    bcrypt.hash(this.password, 10).then(function(hash) {
-    // Store hash in your password DB.
-    this.password=hash;
-    return res.status(200).json({msg: "pass encrypted successfully!"});
-    }).catch((error)=>{
-    return res.status(404).json({error: `pass encryption error: ${error}`})
-    })
+);
 
-})
+userSchema.pre("save", function (){
+    if(!this.isModified("password")) return;
 
+    // const hash = bcrypt.hash(this.password,5);
+    
+    //  this.password = hash;
+});
+
+userSchema.methods.check_password = function (pass){
+    if(pass == this.password){
+    return true;
+    }else{
+        return false;
+    }
+}
 
 export const User= mongoose.model("users", userSchema);
       
