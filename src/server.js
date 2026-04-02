@@ -1,12 +1,14 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import connectDB from "./connection/db.connect.js";
 import { complaint_router } from "./routes/complaint.route.js";
 import cspMiddleware from "./middleware/csp.middleware.js";
 import { User } from "./models/user.model.js";
 dotenv.config();  // config env
 const app = express();
+app.use(cookieParser());
 app.use(cors({
     "origin": process.env.FRONTEND_URL,
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",

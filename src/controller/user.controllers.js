@@ -11,7 +11,16 @@ const loginAdmin = async (req, res)=>{
           if(!isMatch){
               return res.status(400).json({message: "Invalid password"});
           }
-          res.status(200).json({message: "Login successful"});
+          // setting up the accessToken and reFreshToken
+          const Options= {
+            httpOnly:true,
+            secure:false,
+
+          }
+          console.log(user);
+          const accessToken = user.generateAccessToken();
+          const refreshToken = user.genrateRefreshToken();
+          return res.status(200).cookie("accessToken", accessToken, Options).cookie("refreshToken", refreshToken, Options).json({message: "Login successful"});
     }catch(error){
         console.log(error);
         res.status(500).json({message: error.message});
