@@ -35,7 +35,7 @@ return jwt.sign({_id: this._id, userName: this.userName}, process.env.ACCESSTOKE
 }
 
 userSchema.methods.genrateRefreshToken = function(){
-    return jwt.sign({_id: this._id, userName: this.userName}, process.env.REFRESHTOKENSECRET, {expiresIn: "1d"})
+    return jwt.sign({_id: this._id, userName: this.userName}, process.env.REFRESHTOKENSECRET, {expiresIn: "1h"})
 }
 
 
