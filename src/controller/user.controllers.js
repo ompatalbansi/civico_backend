@@ -17,7 +17,7 @@ const loginAdmin = async (req, res)=>{
             secure:false,
 
           }
-          console.log(user);
+        //   console.log(user);
           const accessToken = user.generateAccessToken();
           const refreshToken = user.genrateRefreshToken();
           return res.status(200).cookie("accessToken", accessToken, Options).cookie("refreshToken", refreshToken, Options).json({message: "Login successful"});

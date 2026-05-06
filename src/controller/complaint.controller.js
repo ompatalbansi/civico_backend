@@ -33,9 +33,22 @@ const getAllComplaints = async (req, res) => {
     }
 };
 
+const deleteComplaint = async (req, res) =>{
+    try{
+        const complaint =await Complaint.deleteOne({_id: req.params.id});
+        if(!complaint) return res.status(404).json({
+            message : "facing error in deleting element from db"
+        });
+        res.status(200).json(complaint);
+    }catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+    }
+}
+
 const getComplaintById = async (req, res) => {
     try {
-        console.log(req.params.id);
+        // console.log(req.params.id);
         const complaint = await Complaint.findById(req.params.id);
         if (!complaint) return res.status(404).json({ message: "Complaint not found" });
         res.status(200).json(complaint);
@@ -60,4 +73,4 @@ const updateStatus = async (req, res) => {
     }
 };
 
-export { createComplaint, getAllComplaints, getComplaintById, updateStatus };
+export { createComplaint,deleteComplaint, getAllComplaints, getComplaintById, updateStatus };

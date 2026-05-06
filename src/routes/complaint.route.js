@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createComplaint, getAllComplaints, getComplaintById, updateStatus } from "../controller/complaint.controller.js";
+import { createComplaint,deleteComplaint ,getAllComplaints, getComplaintById, updateStatus } from "../controller/complaint.controller.js";
 import { loginAdmin } from "../controller/user.controllers.js";
 import { isLoginwithToken } from "../middleware/login.middleware.js";
 import jwt from "jsonwebtoken";
@@ -10,6 +10,7 @@ complaint_router.post("/register", createComplaint);
 complaint_router.get("/all", getAllComplaints);
 complaint_router.get("/:id", getComplaintById);
 complaint_router.post("/loginadmin", loginAdmin);
+complaint_router.delete("/:id",deleteComplaint);
 complaint_router.get("/login/auth", (req,res)=>{
 try{
     const {accessToken, refreshToken} = req.cookies;

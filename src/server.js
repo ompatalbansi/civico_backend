@@ -2,12 +2,22 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import ratelimit from "express-rate-limit";
 import connectDB from "./connection/db.connect.js";
 import { complaint_router } from "./routes/complaint.route.js";
 import cspMiddleware from "./middleware/csp.middleware.js";
 import { User } from "./models/user.model.js";
 dotenv.config();  // config env
 const app = express();
+const limiter = ratelimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per window
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    error: 'Too many requests, please try again later.'
+  }
+});
 app.use(cookieParser());
 app.use(cors({
     "origin": process.env.FRONTEND_URL,
@@ -19,6 +29,7 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cspMiddleware);
+app.use(limiter);
 
 connectDB(process.env.MONGODB_URI).then(() => {
     console.log("db connected");
