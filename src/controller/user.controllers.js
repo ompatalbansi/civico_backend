@@ -14,8 +14,8 @@ const loginAdmin = async (req, res)=>{
           // setting up the accessToken and reFreshToken
           const Options= {
             httpOnly:true,
-            secure:false,
-
+            secure:true,
+            sameSite: "None"
           }
         //   console.log(user);
           const accessToken = user.generateAccessToken();
