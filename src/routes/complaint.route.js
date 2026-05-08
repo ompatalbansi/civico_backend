@@ -8,9 +8,7 @@ const complaint_router = Router();
 
 complaint_router.post("/register", createComplaint);
 complaint_router.get("/all", getAllComplaints);
-complaint_router.get("/:id", getComplaintById);
 complaint_router.post("/loginadmin", loginAdmin);
-complaint_router.delete("/:id",deleteComplaint);
 complaint_router.get("/login/auth", (req,res)=>{
 try{
     const {accessToken, refreshToken} = req.cookies;
@@ -57,6 +55,8 @@ try{
 }
 }    
 );
+complaint_router.get("/:id", getComplaintById);
+complaint_router.delete("/:id",deleteComplaint);
 complaint_router.patch("/:id/status", isLoginwithToken, updateStatus);
 
 
