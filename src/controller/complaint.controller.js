@@ -1,4 +1,5 @@
 import Complaint from "../models/complaint.model.js";
+import mongoose from "mongoose";
 
 const createComplaint = async (req, res) => {
     try {
@@ -34,8 +35,14 @@ const getAllComplaints = async (req, res) => {
 };
 
 const deleteComplaint = async (req, res) =>{
+    const {id} = req.params.id;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({
+            msg: "Invalid complaint ID"
+        });
+    }
     try{
-        const complaint =await Complaint.deleteOne({_id: req.params.id});
+        const complaint =await Complaint.deleteOne({_id: id});
         if(!complaint) return res.status(404).json({
             message : "facing error in deleting element from db"
         });
@@ -47,9 +54,15 @@ const deleteComplaint = async (req, res) =>{
 }
 
 const getComplaintById = async (req, res) => {
+     const {id} = req.params.id;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({
+            msg: "Invalid complaint ID"
+        });
+    }
     try {
         // console.log(req.params.id);
-        const complaint = await Complaint.findById(req.params.id);
+        const complaint = await Complaint.findById(id);
         if (!complaint) return res.status(404).json({ message: "Complaint not found" });
         res.status(200).json(complaint);
     } catch (error) {
@@ -59,10 +72,16 @@ const getComplaintById = async (req, res) => {
 };
 
 const updateStatus = async (req, res) => {
+     const {id} = req.params.id;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({
+            msg: "Invalid complaint ID"
+        });
+    }
     try {
         const { status } = req.body;
         const complaint = await Complaint.findByIdAndUpdate(
-            req.params.id,
+            id,
             { status },
             { new: true }
         );
