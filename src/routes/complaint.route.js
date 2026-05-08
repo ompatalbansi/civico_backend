@@ -55,9 +55,10 @@ try{
 }
 }    
 );
+complaint_router.patch("/:id/status", isLoginwithToken, updateStatus);
 complaint_router.get("/:id", getComplaintById);
 complaint_router.delete("/:id",deleteComplaint);
-complaint_router.patch("/:id/status", isLoginwithToken, updateStatus);
+
 
 
 export { complaint_router };
