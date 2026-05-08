@@ -21,7 +21,7 @@ try{
         res.cookie("accessToken", newAccessToken, {
             httpOnly: true,
             secure: true,
-            sameSite: "strict",
+            sameSite: "none",
             maxAge: 60 * 60 * 1000
         });
         return res.status(200).json({
